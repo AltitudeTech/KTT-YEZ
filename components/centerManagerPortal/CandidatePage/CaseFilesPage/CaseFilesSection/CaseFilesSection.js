@@ -17,8 +17,10 @@ import {
   UncontrolledCollapse
 } from 'reactstrap'
 
-import {MANAGER_CANDIDATE_BY_ID_CASE_FILES_QUERY} from '../../../../lib/backendApi/queries'
-import Loading from '../../../common/LoadingIcon/LoadingIcon'
+import { Navbar, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+
+import {MANAGER_CANDIDATE_BY_ID_ALL_CASE_FILES_QUERY} from '../../../../../lib/backendApi/queries'
+import Loading from '../../../../common/LoadingIcon/LoadingIcon'
 
 import CaseFile from './CaseFile'
 // import DetailsModal from './DetailsModal'
@@ -39,6 +41,8 @@ export default class extends Component {
     this.toggle = this.toggle.bind(this)
   }
   toggle(){
+    // console.log(item);
+    // this.setState({selecteditem: item})
     this.setState({modalOpen: !this.state.modalOpen})
   }
 
@@ -53,18 +57,60 @@ export default class extends Component {
                 onClick={()=>this.setState({modalOpen: true})}>
                 <i className="icon-plus"></i> New
               </Button>{' '}
-              <Button size="sm" color="dark"
-                onClick={()=>Router.push(
-                `/manager/candidate/case-files?id=${this.props.id}`,
-                `/manager/candidate/${this.props.id}/case-files`
-              )}>
-                <i className="icon-docs"></i> View All
-              </Button>
             </div>
             Case Files
           </CardTitle>
           <hr />
-          <Query query={MANAGER_CANDIDATE_BY_ID_CASE_FILES_QUERY} variables={{ id: this.props.id}}>
+          <Navbar color="light" light expand="md">
+            <b>
+              1 File
+            </b>
+            <Nav className="ml-auto" navbar>
+              <UncontrolledDropdown>
+                <DropdownToggle tag="a" className="nav-link" caret>
+                  Author
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem header>Show files from this Author</DropdownItem>
+                  <DropdownItem>Text DField</DropdownItem>
+                  <DropdownItem>Text DField</DropdownItem>
+                  <DropdownItem>Text DField</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <UncontrolledDropdown>
+                <DropdownToggle tag="a" className="nav-link" caret>
+                  Author Type
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem header>Show files from this Author type</DropdownItem>
+                  <DropdownItem>Text Field</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <UncontrolledDropdown>
+                <DropdownToggle tag="a" className="nav-link" caret>
+                  Scroll To Date
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem header>Select Date</DropdownItem>
+                  <DropdownItem>Text Field</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <UncontrolledDropdown>
+                <DropdownToggle tag="a" className="nav-link" caret>
+                  Sort
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem header>Sort By</DropdownItem>
+                  <DropdownItem><b><i className="icon-check"/> Newest</b></DropdownItem>
+                  <DropdownItem>Oldest</DropdownItem>
+                  <DropdownItem>Author</DropdownItem>
+                  <DropdownItem>Author Type</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
+          </Navbar>
+          <br />
+          <Query query={MANAGER_CANDIDATE_BY_ID_ALL_CASE_FILES_QUERY} variables={{ id: this.props.id}}>
             {({loading, error, data}) => {
               if (loading)
                 return <Loading />;

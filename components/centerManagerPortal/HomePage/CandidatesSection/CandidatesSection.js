@@ -1,6 +1,7 @@
-import { Component } from 'react'
+import {Component} from 'react'
 import Router from 'next/router'
-import { Query } from 'react-apollo'
+import Link from 'next/link'
+import {Query} from 'react-apollo'
 import {
   Card,
   CardBody,
@@ -10,38 +11,39 @@ import {
   Badge
 } from 'reactstrap'
 
-import {HOME_COMPANY_JOBS_QUERY} from '../../../../lib/backendApi/queries'
+import {MANAGER_CANDIDATE_MANY_QUERY} from '../../../../lib/backendApi/queries'
+import Loading from '../../../common/LoadingIcon/LoadingIcon'
+
 
 // import CandidatesList from './CandidatesList'
 
 const EmptySpace = props => (
   <p className="display-4" style={{padding: '10px 0px 10px'}}>
-    <i className="icon-ghost"></i> This space is lonely
+    <i className="icon-ghost"></i>
+    This space is lonely
   </p>
 )
 
 export default class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      modalOpen: false,
+      modalOpen: false
     }
   }
 
-  render(){
+  render() {
     return (
       <Card>
         <CardBody >
           <CardTitle className="mb-0">
-            <Button className="float-right" size="sm" color="dark"
-              onClick={()=>Router.push('/manager/candidates')}>
+            <Button className="float-right" size="sm" color="dark" onClick={() => Router.push('/manager/candidates')}>
               <i className="icon-docs"></i> View All
             </Button>
             Candidates
           </CardTitle>
-          <hr />
-          {/* Loading... */}
-          <Table responsive>
+          <hr/>
+          <Table responsive="responsive">
             <thead>
               <tr>
                 <th>Name</th>
@@ -49,43 +51,33 @@ export default class extends Component {
                 <th>Phone Number</th>
                 <th>Assignment</th>
               </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Samppa Nori</td>
-                <td>
-                  <Badge color="success">Skill Analysis</Badge>{' '}
-                  <Badge color="primary">Job Seeker</Badge>{' '}
-                  <Badge color="danger">Entrepreneur</Badge>
-                </td>
-                <td>08188555611</td>
-                <td>Trainer {`<Bello Oladipupo>`}</td>
-              </tr>
-              <tr>
-                <td>Samppa Nori</td>
-                <td>
-                  <Badge color="success">Skill Analysis</Badge>{' '}
-                </td>
-                <td>08188555611</td>
-                <td>Trainer {`<Bello Oladipupo>`}</td>
-              </tr>
-              <tr>
-                <td>Samppa Nori</td>
-                <td>
-                </td>
-                <td>08188555611</td>
-                <td>Trainer {`<Bello Oladipupo>`}</td>
-              </tr>
-              <tr>
-                <td>Samppa Nori</td>
-                <td>
-                  <Badge color="success">Skill Analysis</Badge>{' '}
-                  <Badge color="danger">Entrepreneur</Badge>
-                </td>
-                <td>08188555611</td>
-                <td>Trainer {`<Bello Oladipupo>`}</td>
-              </tr>
-            </tbody>
+            </thead>
+            <Query query={MANAGER_CANDIDATE_MANY_QUERY}>
+              {({loading, error, data}) => {
+                if (loading)
+                  return <Loading />
+                if (error)
+                  return `Error! ${error.message}`;
+
+                  const {managerCandidateMany} = data;
+                  const candidate = managerCandidateMany;
+                return(
+                  <tbody>
+                    {managerCandidateMany.map((candidate)=>(
+                      <tr>
+                        <td><Link href={`/manager/candidate?id=${candidate._id}`} as={`/manager/candidate/${candidate._id}`}><a>{`${candidate.name.last} ${candidate.name.first}`}</a></Link></td>
+                        <td>
+                          <Badge color="success">Skill Analysis</Badge>{' '}
+                          <Badge color="primary">Job Seeker</Badge>{' '}
+                          <Badge color="danger">Entrepreneur</Badge>
+                        </td>
+                        <td>{candidate.phone}</td>
+                        <td>Trainer {`<Bello Oladipupo>`}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}}
+              </Query>
           </Table>
         </CardBody>
       </Card>

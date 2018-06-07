@@ -169,7 +169,8 @@ export default class DocumentsList extends Component {
 
         <Query query={MANAGER_CANDIDATE_BY_ID_DOCUMENTS_QUERY}
           variables={{
-            id: this.props.id,
+            // id: this.props.id,
+            id: "5b0c1d38fc700ece3051f97b",
             page: currentPage,
             perPage: perPage
           }}>
@@ -181,6 +182,10 @@ export default class DocumentsList extends Component {
               return `Error! ${error.message}`
 
             const { managerCandidateById } = data;
+            console.log(this.props.id);
+            console.log(data);
+            console.log('managerCandidateById.documentsPagination.length');
+            console.log(managerCandidateById.documentsPagination.items.length);
             const { documentsPagination } = managerCandidateById;
             const candidate = managerCandidateById;
             images = documentsPagination.items.map((doc) => ({

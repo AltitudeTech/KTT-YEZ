@@ -51,6 +51,7 @@
     "react-image-lightbox": "^5.0.0",
     "react-js-pagination": "^3.0.2",
     "react-ladda": "^6.0.0",
+    "react-mfb": "^0.6.0",
     "react-responsive-carousel": "^3.1.33",
     "react-rte": "^0.16.1",
     "react-scroll-to-component-ssr": "^1.0.0",

@@ -27,6 +27,12 @@ app.prepare().then(() => {
   server.get('/manager/candidate/:id', (req, res) => {
     return app.render(req, res, '/manager/candidate', { id: req.params.id });
   })
+  server.get('/manager/candidate/:id/case-files', (req, res) => {
+    return app.render(req, res, '/manager/candidate/case-files', { id: req.params.id });
+  })
+  server.get('/manager/staff/trainer/:id', (req, res) => {
+    return app.render(req, res, '/manager/staff/trainer', { id: req.params.id });
+  })
 
   server.use('/services', serviceRouter)
 

@@ -29,13 +29,9 @@ export default {
       }
     },*/
     {
-      name: 'Jobs',
-      url: '/dashboard',
-      icon: 'icon-feed',
-      badge: {
-        variant: 'success',
-        text: '4 NEW'
-      }
+      name: 'Candidates',
+      url: '/manager/candidates',
+      icon: 'icon-people',
     },
     // {
     //   title: true,

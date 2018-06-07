@@ -54,9 +54,10 @@ export default function withLayout(Child, opts) {
             <meta charSet="utf-8"/>
             {/*<link rel="icon" href="wt_62309/images/favicon.ico" type="image/x-icon"/>*/}
             {/*<!-- Stylesheets-->*/}
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.0/ladda.min.css"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"/>
             <link rel="stylesheet" href="/static/css/portal/style.css"/>
             {/* <link rel="stylesheet" href="/static/css/centerManagerPortal/style.css"/> */}
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"/>
             {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/> */}
           </Head>
           <div className="app">
@@ -65,7 +66,7 @@ export default function withLayout(Child, opts) {
               <Sidebar/>
               <main className="main" style={{paddingTop: '24px'}}>
                 {/* <Breadcrumb/> */}
-                <p className="display-4 text-center fade-in" style={{fontSize: '2rem'}}>
+                <p className="display-4 text-center fadeIn" style={{fontSize: '2rem'}}>
                   KTT YEZ Job Center Manager Portal
                 </p>
                 <Container fluid>

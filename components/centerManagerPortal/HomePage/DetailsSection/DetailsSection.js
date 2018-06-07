@@ -41,7 +41,7 @@ export default props => (
           const {viewerCenterManager: {centerManager}} = data;
           // const centerManager = centerManager;
           // console.log(centerManager);
-          
+
           return (
             <CardBody>
               <Row>
@@ -49,6 +49,7 @@ export default props => (
                   <img style={styles.image} src={'/static/images/5.jpg'} className="img-avatar" alt="bellooladipupo41@gmail.com"/>
                   <CardTitle className="mb-0">{centerManager ? `${centerManager.name.first} ${centerManager.name.last}` : `Lastname Firstname`}</CardTitle>
                   <div className="small text-muted">{centerManager.username ? `@${centerManager.username}` : `@pick a username`}</div>
+                  <div className={'text-muted ' + centerManager.stateOfResidence ? '' : 'text-danger'}><i className="icon-globe"/> {centerManager.stateOfResidence ? `${prettifyState(centerManager.stateOfResidence)}` : `No state of residence selected, contact an admin to resolve this`}</div>
                 </Col>
               </Row>
               <hr/>
